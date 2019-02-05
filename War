@@ -1,0 +1,217 @@
+//Nathaniel Kurty
+//object oriented programming spring 2019
+//(2/5/2019)
+//game of war
+
+#include <iostream>
+#include <algorithm>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
+//used to make the shuffle random
+int seed (int j)
+{
+    return rand()%j;
+}
+
+int main()
+{
+    srand(unsigned (time(0))); //random shuffling
+
+    //for the game of war, the suit is ignored. rather, 4 of each rank is added to an array called deck. Ace being 14, king 13, queen 12, etc.
+    int deck[52] ={2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,12,12,12,12,13,13,13,13,14,14,14,14};
+
+    //display nonshuffled deck *testing purposes*
+    //for (int i=0;i<52;i++)
+    //    cout<<deck[i]<< " ";
+
+    //shuffle the deck
+    random_shuffle(&deck[0],&deck[52],seed); //randomizes the deck array with random seed
+
+    cout<< endl;//for spacing output
+
+    //display shuffled deck *testing purposes*
+    //for (int i=0;i<52;i++)
+    //    cout<<deck[i]<< " ";
+
+
+
+    //the deck is split between the first half and second half of the array.
+    //first player starts at the beginning and ends at the middle.
+    //the second player starts at the end and works towards the middle.
+
+    int player_one_Score = 0; //score of player 1
+    int Player_two_score = 0;//score of player 2
+    int i = 0; //counter user for loop
+
+    cout << endl << "The deck is shuffled!" << endl << "Let the game of war begin!" << endl << endl; //dialogue
+
+
+
+
+    do
+    {
+        //dialogue for the game
+        cout<< endl << endl << "it is round " << i+1; //display current round
+        cout<< endl<< "Player 1 drew: "<< deck[i] << endl << "player 2 drew: " << deck[51-i]; //display the players cards
+
+
+        //if the deck has limited cards in the library, than alternative games are play in case.
+        // for instance, if the deck has less than two cards in it, a war would cause the deck to run out
+        // of cards.
+
+        //if the deck is not down to the last card couple cards in the deck, the game is played normally.
+        if (i <= 23)
+        {
+            if(deck[i] > deck[51-i])//update score of player one and announce they win
+            {
+                player_one_Score += 2;
+                i++;
+                cout<< endl << "player 1 wins the turn";
+            }
+            else if(deck[i] < deck[51-i])//update score of player two and announce they win
+            {
+                Player_two_score += 2;
+                i++;
+                cout<< endl << "player 2 wins the turn";
+            }
+            else if((deck[i]) == deck[51-i])//initiates a war
+                {
+                    //dialogue for the game
+                    cout << endl << "War has been Declared!";
+                    cout << endl << "A card will be placed face up and face down for each player";
+                    i++;
+                    cout << endl << endl << "it is round " << i+1;
+                    cout << endl << "Player one's face up card: " << deck[i];
+                    cout << endl << "Player two's face up card: " << deck[51-i];
+
+
+                    if(deck[i] > deck[51-i])//update score of player one and announce they win
+                    {
+                        player_one_Score += 6;
+                        i += 2;
+                        cout << endl << "player 1 wins the war, the next round shall be skipped";
+                    }
+                    else if(deck[i] < deck[51-i])//update score of player two and announce they win
+                    {
+                        Player_two_score += 6;
+                        i += 2;
+                        cout << endl << "player 2 wins the war, the next round shall be skipped";
+                    }
+                    else if (deck[i] == deck[51-i])//should the first round of war end in a draw, move to the face down cards
+                        {
+                            cout << endl << "The first round of war ends in a draw!";
+                            cout << endl << "Onto the face down cards!";
+                            i++;
+                            cout << endl << endl << "it is round " << i+1;
+                            cout << endl << "Player one's face down card: " << deck[i];
+                            cout << endl << "Player two's face down card: " << deck[51-i];
+
+                            if(deck[i] > deck[51-i])//update score of player one and announce they win
+                            {
+                                player_one_Score += 6;
+                                i++;
+                                cout << endl << "player 1 wins the war";
+                            }
+                            else if(deck[i] < deck[51-i])//update score of player two and announce they win
+                            {
+                                Player_two_score += 6;
+                                i++;
+                                cout << endl << "player 2 wins the war";
+                            }
+                            else if(deck[i] == deck[51-i])//the last round of war ends in a draw, rewarding equal points between players
+                            {
+                                cout << endl << "This war has ended in a draw!";
+                                player_one_Score += 3;
+                                Player_two_score += 3;
+                                i++;
+                            }
+
+                    }
+            }
+        }
+
+        else if (i == 25) //if the deck is down to its final card, an alternate game is played
+        {
+             if(deck[i] > deck[51-i])//update score of player one and announce they win
+            {
+                player_one_Score += 2;
+                i++;
+                cout<< endl << "player 1 wins the turn";
+            }
+            else if(deck[i] < deck[51-i])//update score of player two and announce they win
+            {
+                Player_two_score += 2;
+                i++;
+                cout<< endl << "player 2 wins the turn";
+            }
+            else if((deck[i]) == deck[51-i])//update score of both players and announce draw
+                {
+                    cout<< endl << "This is the final turn! Round shall end in a draw";
+                    player_one_Score++;
+                    Player_two_score++;
+                    i++;
+                }
+        }
+
+         else if (i == 24)//if the deck is down to its final two cards, an alternate game is played
+        {
+             if(deck[i] > deck[51-i])//update score of player one and announce they win
+            {
+                player_one_Score += 2;
+                i++;
+                cout<< endl << "player 1 wins the turn";
+            }
+            else if(deck[i] < deck[51-i])//update score of player two and announce they win
+            {
+                Player_two_score += 2;
+                i++;
+                cout<< endl << "player 1 wins the turn";
+            }
+            else if((deck[i]) == deck[51-i])//initiates a war with the last card in the deck
+                {
+                    cout << endl << "Only one card remains! war can only be waged with the one card!";
+                    i++;
+                     cout<< endl << endl << "it is round " << i+1;
+                    cout << endl << "the last two cards are " << deck[i] << " vs " << deck[51-i];
+
+                    if(deck[i] > deck[51-i])//update score of player one and announce they win
+                    {
+                        player_one_Score += 4;
+                        i++;
+                        cout<< endl << "player 1 wins the turn";
+                    }
+                    else if(deck[i] < deck[51-i])//update score of player two and announce they win
+                    {
+                        Player_two_score += 4;
+                        i++;
+                        cout<< endl << "player 1 wins the turn";
+                    }
+                    else if((deck[i]) == deck[51-i])//update score of both players and announce draw
+                    {
+                        cout << endl << "This war ends in a draw!";
+                        player_one_Score += 2;
+                        Player_two_score += 2;
+                        i++;
+                    }
+
+                }
+        }
+        }
+
+while(i < 26);//loop goes through half the size of the deck
+
+//dialogue
+cout << endl << endl << "The deck is empty! The game is finished! The final results are...";
+cout << endl << endl << "player one's score: " << player_one_Score << endl << "player two's score: " << Player_two_score << endl;
+
+if (player_one_Score > Player_two_score)//if player one wins, announce it
+    cout<< endl << "Player one wins!";
+else if (Player_two_score > player_one_Score)//if player two wins, announce it
+    cout<< endl << "Player two wins!";
+else // if the players draw, announce it
+    cout<< endl << "The game ends in a draw!";
+
+}
