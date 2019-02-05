@@ -45,7 +45,14 @@ int main()
     int player_one_Score = 0; //score of player 1
     int Player_two_score = 0;//score of player 2
     int i = 0; //counter user for loop
-
+    
+    //explanation of numbers in the array
+    cout << endl << "The cards are as follows: ";
+    cout << endl << "Ace: 14";
+    cout << endl << "King: 13";
+    cout << endl << "Queen: 12";
+    cout << endl << "Jack: 11";
+    cout << endl << "All other numbers remain the same."
     cout << endl << "The deck is shuffled!" << endl << "Let the game of war begin!" << endl << endl; //dialogue
 
 
