@@ -1,0 +1,53 @@
+class card{
+private
+int Rank;
+int Suit;
+int color;
+int joker;
+
+public
+
+void ReturnColor()
+{
+    if (color == 0)
+        cout << "The color is Black" << endl;
+    else
+        cout << "The color is Red" << endl;
+}
+void PrintCard()
+{
+    switch(Rank) 
+    {
+    case 1: cout << "The card is 2 ";
+    case 1: cout << "The card is 3 ";
+    case 1: cout << "The card is 4 ";
+    case 1: cout << "The card is 5 ";
+    case 1: cout << "The card is 6 ";
+    case 1: cout << "The card is 7 ";
+    case 1: cout << "The card is 8 ";
+    case 1: cout << "The card is 9 ";
+    case 1: cout << "The card is 10 ";
+    case 1: cout << "The card is Jack ";
+    case 1: cout << "The card is Queen ";
+    case 1: cout << "The card is King ";
+    case 1: cout << "The card is Ace ";
+    }
+    switch(Suit)
+    {
+    case 1: cout << "of Spades" << endl;
+    case 2: cout << "of Clubs" << endl;
+    case 3: cout << "of Diamonds" << endl;
+    case 4: cout << "of Hearts" << endl;
+    }
+}
+void isJoker()
+{
+    if (joker == 0)
+        cout << "This is a joker" << endl;
+    else
+        cout << "This is not a joker" << endl;
+}
+
+};
+
+
