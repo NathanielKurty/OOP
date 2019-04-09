@@ -1,0 +1,3 @@
+The game is updated in a couple of ways.  The colors of the snake are changed to more comfortably adjust to the larger change of the 
+project, the addition of a hazard. The snake is now green and is trying to acquire green segments while trying to avoid red segments.  
+These red segments spawn randomly and appear more the larger the snake gets.
