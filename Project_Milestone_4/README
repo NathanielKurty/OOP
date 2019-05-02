@@ -1,0 +1,1 @@
+The event Processing was factored out of main and was placed into its own seperate function. The game operates using that event processing.
